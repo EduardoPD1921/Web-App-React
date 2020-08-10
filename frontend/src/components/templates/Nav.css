@@ -17,3 +17,15 @@ svg.bi.bi-plus {
     margin-top: 1px;
 }
 
+a.navItem {
+    display: block;
+    color: black;
+    margin-top: 10px;
+}
+
+a.navItem:hover {
+    text-decoration: none;
+    background: rgb(238,174,202);
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%); 
+}
+
