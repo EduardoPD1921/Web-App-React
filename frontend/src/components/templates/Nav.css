@@ -1,0 +1,19 @@
+aside.navContent {
+    background-color: #fff9ea;
+    width: 10%;
+    overflow: hidden;
+    display: block;
+    align-items: center;
+    justify-content: center;
+}
+
+button.btn.btn-light {
+    font-size: 0.8em;
+    width: 100%;
+    justify-content: center;
+}
+
+svg.bi.bi-plus {
+    margin-top: 1px;
+}
+

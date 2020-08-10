@@ -1,0 +1,11 @@
+div.header {
+    background-color: #fff9ea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+}
+
+.bi.bi-journal {
+    margin: 0 0 12px 5px;
+}
