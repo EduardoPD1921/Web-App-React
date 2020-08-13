@@ -81,10 +81,17 @@ export default class Button extends Component {
                 note.date.day = day
                 note.date.time = time
 
-                axios.post(`${baseUrl}`, note).then(resp => console.log(resp.data))
+                axios.post(`${baseUrl}`, note).then(resp => this.updateLocalNoteList(resp.data))
             }
-
         }
+    }
+
+    updateLocalNoteList(newNote) {
+        const currentNotes = this.state.notes
+
+        currentNotes.push(newNote)
+        this.setState({notes: currentNotes})
+        this.setState({creatingANewNote: false})
     }
 
     render() {
