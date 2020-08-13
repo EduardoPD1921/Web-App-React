@@ -1,22 +1,3 @@
 {
-  "notes": [
-    {
-      "id": 1,
-      "content": "",
-      "date": {
-        "day": "12/08/2020",
-        "time": "04:10:24"
-      },
-      "title": "test"
-    },
-    {
-      "id": 2,
-      "content": "",
-      "date": {
-        "day": "12/08/2020",
-        "time": "22:36:51"
-      },
-      "title": "Nice"
-    }
-  ]
+  "notes": []
 }
