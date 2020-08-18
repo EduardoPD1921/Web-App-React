@@ -1,7 +1,7 @@
 import React from 'react'
-import './Main.css'
+import './note_Info.css'
 
 export default props =>
-    <main className="anotation">
+    <div className="noteInfo">
         {props.children}
-    </main>
+    </div>

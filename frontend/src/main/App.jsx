@@ -5,13 +5,13 @@ import 'font-awesome/css/font-awesome.min.css'
 import {BrowserRouter} from 'react-router-dom'
 
 import Header from '../components/templates/Header'
-import Nav from '../components/templates/Nav'
+import Button from '../components/Button'
 
 export default props =>
     <BrowserRouter>
         <div className="app">
             <Header/>
-            <Nav/>
+            <Button/>
         </div>
     </BrowserRouter>
     
