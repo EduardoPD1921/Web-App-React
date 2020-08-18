@@ -4,11 +4,10 @@ import axios from 'axios'
 
 import Nav from './templates/Nav'
 import Main from './templates/Main'
-import NoteInfo from './noteInfo'
+import NoteInfo from './note_Info'
 
 const initialState = {
     notes: [],
-    currentContent: '',
     noteOnChanging: '',
     newNote: {id: '', content: '', date: {day: '', time: ''}, title: ''},
     creatingANewNote: false
@@ -33,12 +32,15 @@ export default class Button extends Component {
         )
     }
 
-    renderNoteContent(e) {
+    renderNoteContent(event) {
         try {
-            e.preventDefault()
-            const note = this.state.notes[e.target.id - 1]
-
-            this.setState({currentContent: note.content})
+            event.preventDefault()
+            
+            const noteFiltered = this.state.notes.filter(e => e.id.toString() === event.target.id.toString())
+            const noteIndex = this.state.notes.indexOf(noteFiltered[0])
+            const note = this.state.notes[noteIndex]
+            
+            document.getElementById('textarea').value = noteFiltered[0].content
             this.setState({noteOnChanging: note})
         } catch(e) {
             console.warn(e)
@@ -49,7 +51,7 @@ export default class Button extends Component {
         return (
             this.state.notes.map(note => {
                 return (
-                    <a href="/" className="navItem" id={note.id} key={note.id} {...note} onClick={e => this.renderNoteContent(e)}>
+                    <a href="/" className="navItem" id={note.id} key={note.id} onClick={e => this.renderNoteContent(e)}>
                         <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-caret-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">    
                             <path fillRule="evenodd" d="M6 12.796L11.481 8 6 3.204v9.592zm.659.753l5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z"/>    
                         </svg>    
@@ -75,15 +77,16 @@ export default class Button extends Component {
 
     deleteNote(event) {
         const noteid = event.target.attributes.idnote.value
-        const removingNote = this.state.notes[noteid - 1]
-
+        const noteFiltered = this.state.notes.filter(e => noteid.toString() === e.id.toString())
         axios.delete(`${baseUrl}/${noteid}`)
 
-        this.updateLocalNoteList(removingNote, true)
+        document.getElementById('textarea').value = ''
+        this.setState({noteOnChanging: ''})
+        this.updateLocalNoteList(noteFiltered, true)
     }
 
     saveNote(event) {
-        const note = document.getElementById('test').value
+        const note = document.getElementById('textarea').value
         const noteOnChanging = this.state.noteOnChanging
         noteOnChanging.content = note
 
@@ -131,11 +134,10 @@ export default class Button extends Component {
             currentNotes.push(newNote)
             this.setState({notes: currentNotes})
             this.setState({creatingANewNote: false})
-            this.setState({currentContent: newNote.content})
         } else if (isRemoving === true) {
             const currentNotes = this.state.notes
 
-            currentNotes.splice(currentNotes.indexOf(newNote), 1)
+            currentNotes.splice(currentNotes.indexOf(newNote[0]), 1)
             this.setState({notes: currentNotes})
         }
     }
@@ -154,7 +156,7 @@ export default class Button extends Component {
                         {this.renderNoteInfo()}
                         <button type="button" className="btn btn-success" onClick={() => this.saveNote()}></button>
                     </NoteInfo>
-                    <textarea id="test" rows="35" cols="60" defaultValue={this.state.currentContent}>
+                    <textarea id="textarea" rows="35" cols="60">
                     </textarea>
                 </Main>
             </React.Fragment>

@@ -1,5 +1,5 @@
 import React from 'react'
-import './noteInfo.css'
+import './note_Info.css'
 
 export default props =>
     <div className="noteInfo">
