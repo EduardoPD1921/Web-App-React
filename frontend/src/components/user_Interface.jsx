@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import './Button.css'
 import axios from 'axios'
 
 import Nav from './templates/Nav'
@@ -153,8 +152,11 @@ export default class Button extends Component {
 
                 <Main>
                     <NoteInfo>
-                        {this.renderNoteInfo()}
-                        <button type="button" className="btn btn-success" onClick={() => this.saveNote()}></button>
+                        <div className="note-Info">
+                            {this.renderNoteInfo()}
+                        </div>
+                        
+                        <button type="button" className="save-Button" onClick={() => this.saveNote()}>Save</button>
                     </NoteInfo>
                     <textarea id="textarea" rows="35" cols="60">
                     </textarea>

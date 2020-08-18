@@ -1,5 +1,26 @@
-div.noteInfo {
+div.note-Info {
     position: absolute;
     top: 0px;
     right: 236px;
+}
+
+button.save-Button {
+    background-color: #28a745;
+    border-radius: 5px;
+    border-style: none;
+    position: absolute;
+    top: -10px;
+    left: 235px;
+    height: 25px;
+}
+
+button.save-Button:hover {
+    background-color: #218838;
+    transition: background-color 100ms linear;
+}
+
+button.save-Button:focus {
+    border-style: solid;
+    border-color: #a3d9b0;
+    background-color: #1e7e34;
 }
