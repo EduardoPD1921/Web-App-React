@@ -9,7 +9,8 @@ const initialState = {
     notes: [],
     noteOnChanging: '',
     newNote: {id: '', content: '', date: {day: '', time: ''}, title: ''},
-    creatingANewNote: false
+    creatingANewNote: false,
+    is_Saved: true
 }
 
 const baseUrl = 'http://localhost:3001/notes'
@@ -33,14 +34,18 @@ export default class Button extends Component {
 
     renderNoteContent(event) {
         try {
-            event.preventDefault()
-            
-            const noteFiltered = this.state.notes.filter(e => e.id.toString() === event.target.id.toString())
-            const noteIndex = this.state.notes.indexOf(noteFiltered[0])
-            const note = this.state.notes[noteIndex]
-            
-            document.getElementById('textarea').value = noteFiltered[0].content
-            this.setState({noteOnChanging: note})
+            if (this.state.is_Saved === true) {
+                event.preventDefault()
+                
+                const noteFiltered = this.state.notes.filter(e => e.id.toString() === event.target.id.toString())
+                const noteIndex = this.state.notes.indexOf(noteFiltered[0])
+                const note = this.state.notes[noteIndex]
+                
+                document.getElementById('textarea').value = noteFiltered[0].content
+                this.setState({noteOnChanging: note})
+            } else if (this.state.is_Saved === false) {
+                
+            }
         } catch(e) {
             console.warn(e)
         }
@@ -141,6 +146,10 @@ export default class Button extends Component {
         }
     }
 
+    setSavedValue() {
+        this.setState({is_Saved: false})
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -158,7 +167,7 @@ export default class Button extends Component {
                         
                         <button type="button" className="save-Button" onClick={() => this.saveNote()}>Save</button>
                     </NoteInfo>
-                    <textarea id="textarea" rows="35" cols="60">
+                    <textarea id="textarea" rows="35" cols="60" onChange={() => this.setSavedValue()}>
                     </textarea>
                 </Main>
             </React.Fragment>
